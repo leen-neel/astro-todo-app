@@ -1,9 +1,6 @@
 ---
 // Component Imports
-import Counter from '../components/Counter.vue';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+import Todos from '../components/Todos.vue';
 ---
 
 <html lang="en">
@@ -12,22 +9,21 @@ import Counter from '../components/Counter.vue';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<style>
-			html,
-			body {
-				font-family: system-ui;
-				margin: 0;
-			}
-			body {
-				padding: 2rem;
-			}
-		</style>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<title>Todo App</title>
 	</head>
 	<body>
-		<main>
-			<Counter client:visible>
-				<button class="btn">Button</button>
-			</Counter>
+		<main class="p-5">
+			<Todos client:visible />
+
+			<button
+				class="fixed z-90 bottom-10 right-8 btn btn-circle btn-primary btn-lg"
+			>
+				<span class="material-icons">add</span>
+			</button>
 		</main>
 	</body>
 </html>
