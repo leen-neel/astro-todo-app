@@ -1,0 +1,20 @@
+{
+  "name": "@example/framework-vue",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^2.0.1",
+    "@astrojs/vue": "^1.0.2",
+    "astro": "^1.2.8",
+    "tailwindcss": "^3.1.8",
+    "vue": "^3.2.37"
+  }
+}
