@@ -1,7 +1,6 @@
 ---
 // Component Imports
 import Todos from '../components/Todos.vue';
-import NewTodo from '../components/NewTodo.vue';
 
 import { addTodo } from '../utils/todoFunctions';
 ---
@@ -21,7 +20,6 @@ import { addTodo } from '../utils/todoFunctions';
 	<body>
 		<main class="p-5">
 			<Todos client:visible />
-			<NewTodo client:visible />
 		</main>
 	</body>
 </html>

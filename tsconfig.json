@@ -1,9 +1,15 @@
 {
 	"extends": "astro/tsconfigs/base",
+
 	"compilerOptions": {
 		// Needed for TypeScript intellisense in the template inside Vue files
 		"jsx": "preserve",
-		"allowJs": true
+		"allowJs": true,
+		"baseUrl": ".",
+		"paths": {
+			"@utils/*": ["src/utils/*"],
+			"@types/*": ["src/types/*"]
+		}
 	},
 	"exclude": ["node_modules"]
 }

@@ -1,8 +1,26 @@
-const addTodo = (todoTitle) => {
-	alert(todoTitle);
-	console.log(todoTitle);
+function getTodos() {
+	return JSON.parse(localStorage.getItem('todos'));
+}
+
+const setTodos = (todos) => {
+	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-const getTodos = () => JSON.parse(localStorage.getItem('todos'));
+const addTodo = (todoTitle) => {
+	let allTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
-export { addTodo, getTodos };
+	let newTodo = {
+		title: todoTitle,
+		date: new Date().toLocaleString(),
+		done: false,
+	};
+
+	if (localStorage.length == 0) {
+		localStorage.setItem('todos', JSON.stringify([newTodo]));
+	} else {
+		allTodos.push(newTodo);
+		localStorage.setItem('todos', JSON.stringify(allTodos));
+	}
+};
+
+export { addTodo, getTodos, setTodos };
