@@ -11,8 +11,9 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from 'vue';
+import * as todoHelpers from '../utils/todoFunctions';
 
 export default defineComponent({
 	setup() {
@@ -32,7 +33,7 @@ export default defineComponent({
 		const todos = ref();
 
 		localStorage.setItem('todos', JSON.stringify(obj));
-		todos.value = JSON.parse(localStorage.getItem('todos'));
+		todos.value = todoHelpers.getTodos();
 
 		return {
 			todos,
