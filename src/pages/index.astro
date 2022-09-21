@@ -1,6 +1,7 @@
 ---
 // Component Imports
 import Todos from '../components/Todos.vue';
+import { addTodo } from '../utils/todoFunctions';
 ---
 
 <html lang="en">
@@ -19,11 +20,37 @@ import Todos from '../components/Todos.vue';
 		<main class="p-5">
 			<Todos client:visible />
 
-			<button
-				class="fixed z-90 bottom-10 right-8 btn btn-circle btn-primary btn-lg"
+			<input type="checkbox" id="add-todo" class="modal-toggle" />
+			<div class="modal">
+				<div class="modal-box relative">
+					<label
+						for="add-todo"
+						class="btn btn-sm btn-circle absolute right-2 top-2"
+						>✕
+					</label>
+
+					<div>
+						<input
+							type="text"
+							placeholder="Rule the world...."
+							class="input w-full max-w-xs"
+							id="todoTitle"
+						/>
+
+						<button
+							class="btn btn-primary ml-2"
+							onclick={addTodo(todoTitle.value)}>Add</button
+						>
+					</div>
+				</div>
+			</div>
+
+			<label
+				for="add-todo"
+				class="btn modal-button btn-lg btn-circle fixed z-90 bottom-10 right-8 btn-primary"
 			>
 				<span class="material-icons">add</span>
-			</button>
+			</label>
 		</main>
 	</body>
 </html>
