@@ -50,7 +50,11 @@
 			Import
 		</button>
 
-		<button class="mr-2 btn float-right gap-2">
+		<button
+			v-if="todos"
+			class="mr-2 btn float-right gap-2"
+			@click="exportTodos()"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				height="24px"
@@ -96,12 +100,20 @@ export default defineComponent({
 			todos.value = todoHelpers.getTodos();
 		};
 
+		const exportTodos = () => {
+			todoHelpers.exportToJsonFile(
+				todos.value,
+				`Todos at ${new Date().toISOString()}.json`
+			);
+		};
+
 		return {
 			todos,
 			todoTitle,
 			todoHelpers,
 
 			newTodo,
+			exportTodos,
 		};
 	},
 });

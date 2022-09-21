@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 function getTodos() {
 	return JSON.parse(localStorage.getItem('todos'));
 }
@@ -12,7 +14,7 @@ const addTodo = (todoTitle) => {
 
 	let newTodo = {
 		title: todoTitle,
-		date: new Date().toLocaleString(),
+		date: `${format(new Date(), 'do MMMM, y')} at ${format(new Date(), 'p')}`,
 		done: false,
 	};
 
@@ -23,5 +25,18 @@ const addTodo = (todoTitle) => {
 		localStorage.setItem('todos', JSON.stringify(allTodos));
 	}
 };
+
+export function exportToJsonFile(jsonData, name = 'data.json') {
+	const dataStr = JSON.stringify(jsonData);
+	const dataUri =
+		'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+	const exportFileDefaultName = name;
+
+	const linkElement = document.createElement('a');
+	linkElement.setAttribute('href', dataUri);
+	linkElement.setAttribute('download', exportFileDefaultName);
+	linkElement.click();
+}
 
 export { addTodo, getTodos, setTodos };
