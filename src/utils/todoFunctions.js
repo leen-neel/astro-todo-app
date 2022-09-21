@@ -6,6 +6,7 @@ const setTodos = (todos) => {
 	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
+// Adds a todo to the localstorage
 const addTodo = (todoTitle) => {
 	let allTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
