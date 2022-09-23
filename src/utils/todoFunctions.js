@@ -13,6 +13,7 @@ const addTodo = (todoTitle) => {
 	let allTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
 	let newTodo = {
+		id: allTodos.length + 1,
 		title: todoTitle,
 		date: `${format(new Date(), 'do MMMM, y')} at ${format(new Date(), 'p')}`,
 		done: false,
@@ -26,7 +27,14 @@ const addTodo = (todoTitle) => {
 	}
 };
 
-export function exportToJsonFile(jsonData, name = 'data.json') {
+const deleteTodo = (todoID) => {
+	let allTodos = JSON.parse(localStorage.getItem('todos'));
+	const filteredTodos = allTodos.filter((todo) => todo.id !== todoID);
+
+	localStorage.setItem('todos', JSON.stringify(filteredTodos));
+};
+
+const exportToJsonFile = (jsonData, name = 'data.json') => {
 	const dataStr = JSON.stringify(jsonData);
 	const dataUri =
 		'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
@@ -37,6 +45,6 @@ export function exportToJsonFile(jsonData, name = 'data.json') {
 	linkElement.setAttribute('href', dataUri);
 	linkElement.setAttribute('download', exportFileDefaultName);
 	linkElement.click();
-}
+};
 
-export { addTodo, getTodos, setTodos };
+export { addTodo, getTodos, setTodos, exportToJsonFile, deleteTodo };

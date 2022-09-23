@@ -1,9 +1,17 @@
 <template>
 	<div
 		v-for="todo in todos"
-		:key="todo.title"
+		:key="todo.id"
 		class="card bg-base-100 shadow-xl mt-1.5"
 	>
+		<div class="card-actions justify-end p-1">
+			<span
+				class="material-icons text-error cursor-pointer"
+				@click="removeTodo(todo.id)"
+				>delete</span
+			>
+		</div>
+
 		<div class="card-body">
 			<h2 class="card-title">{{ todo.title }}</h2>
 			<p>{{ todo.date }}</p>
@@ -100,6 +108,11 @@ export default defineComponent({
 			todos.value = todoHelpers.getTodos();
 		};
 
+		const removeTodo = (id) => {
+			todoHelpers.deleteTodo(id);
+			todos.value = todoHelpers.getTodos();
+		};
+
 		const exportTodos = () => {
 			todoHelpers.exportToJsonFile(
 				todos.value,
@@ -114,6 +127,7 @@ export default defineComponent({
 
 			newTodo,
 			exportTodos,
+			removeTodo,
 		};
 	},
 });
