@@ -117,22 +117,24 @@ export default defineComponent({
 		};
 
 		function readerLoad(event) {
-			let result = event.target.result;
-			let parsed = JSON.parse(result);
+			let parsed = JSON.parse(event.target.result); // Parsing the result of the event as JSON
 
+			// Finally we render it and store it to localStorage
 			todos.value = parsed;
 			todoHelpers.setTodos(parsed);
 		}
 
 		const importTodos = () => {
+			// We create an inivisble input element
 			let inputFile = document.createElement('input');
 			inputFile.setAttribute('type', 'file');
 			inputFile.setAttribute('accept', '.json');
 
+			// We listen to its change event
 			inputFile.addEventListener('change', (e) => {
 				let reader = new FileReader();
-				reader.onload = readerLoad;
-				reader.readAsText(e.target.files[0]);
+				reader.onload = readerLoad; // When the reader is loaded we fire a callback
+				reader.readAsText(e.target.files[0]); // Reading the contents as text
 			});
 
 			inputFile.click();
