@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="w-full mt-3">
-		<button class="btn float-right gap-2">
+		<button class="btn float-right gap-2" @click="importTodos">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				height="24px"
@@ -54,15 +54,10 @@
 					d="M9 3L5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"
 				/>
 			</svg>
-
 			Import
 		</button>
 
-		<button
-			v-if="todos"
-			class="mr-2 btn float-right gap-2"
-			@click="exportTodos()"
-		>
+		<button class="mr-2 btn float-right gap-2" @click="exportTodos()">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				height="24px"
@@ -106,6 +101,7 @@ export default defineComponent({
 		const newTodo = () => {
 			todoHelpers.addTodo(todoTitle.value);
 			todos.value = todoHelpers.getTodos();
+			todoTitle.value = '';
 		};
 
 		const removeTodo = (id) => {
@@ -120,6 +116,28 @@ export default defineComponent({
 			);
 		};
 
+		function readerLoad(event) {
+			let result = event.target.result;
+			let parsed = JSON.parse(result);
+
+			todos.value = parsed;
+			todoHelpers.setTodos(parsed);
+		}
+
+		const importTodos = () => {
+			let inputFile = document.createElement('input');
+			inputFile.setAttribute('type', 'file');
+			inputFile.setAttribute('accept', '.json');
+
+			inputFile.addEventListener('change', (e) => {
+				let reader = new FileReader();
+				reader.onload = readerLoad;
+				reader.readAsText(e.target.files[0]);
+			});
+
+			inputFile.click();
+		};
+
 		return {
 			todos,
 			todoTitle,
@@ -127,6 +145,7 @@ export default defineComponent({
 
 			newTodo,
 			exportTodos,
+			importTodos,
 			removeTodo,
 		};
 	},

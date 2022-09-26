@@ -35,6 +35,10 @@ const deleteTodo = (todoID) => {
 };
 
 const exportToJsonFile = (jsonData, name = 'data.json') => {
+	if (jsonData.length == 0) {
+		return;
+	}
+
 	const dataStr = JSON.stringify(jsonData);
 	const dataUri =
 		'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
